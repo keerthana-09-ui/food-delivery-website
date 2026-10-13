@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TastyBite Restaurant — delicious food for every mood.">
+  <title>TastyBite Restaurant</title>
+  <style>
+    :root {
+      --orange: #f4511e;
+      --orange-dark: #d83b12;
+      --cream: #fff8f0;
+      --ink: #191613;
+      --muted: #667085;
+      --white: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--cream); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 92%); margin: auto; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(22, 18, 14, .97); color: white; }
+    .navbar { min-height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+    .logo { font-family: Georgia, serif; font-size: 1.65rem; font-weight: bold; white-space: nowrap; }
+    .logo span { color: var(--orange); }
+    .logo small { display: block; font: 10px Arial, sans-serif; letter-spacing: 5px; text-align: center; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: .95rem; transition: color .2s; }
+    .nav-links a:hover { color: #ff9a42; }
+    .btn { display: inline-block; border: 0; border-radius: 24px; background: var(--orange); color: white; padding: 12px 22px; font-weight: bold; cursor: pointer; transition: transform .2s, background .2s; }
+    .btn:hover { background: var(--orange-dark); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border: 1px solid white; margin-left: 10px; }
+    .btn-outline:hover { background: white; color: var(--ink); }
+    .hero { min-height: 360px; display: flex; align-items: center; color: white; background: linear-gradient(90deg, rgba(15,12,9,.92) 0%, rgba(15,12,9,.72) 43%, rgba(15,12,9,.1) 100%), url('https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1800&q=85') center/cover; }
+    .hero-content { max-width: 550px; padding: 56px 0; }
+    .eyebrow { color: #ff9a42; font-size: .78rem; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; }
+    h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; line-height: 1.15; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); margin: 12px 0; }
+    h1 span { color: #ffbd59; }
+    .hero p { max-width: 440px; margin-bottom: 24px; color: #f1eee9; }
+    section { scroll-margin-top: 80px; }
+    .menu-section { padding: 42px 0 48px; }
+    .section-heading { text-align: center; margin-bottom: 25px; }
+    .section-heading h2 { font-size: 2.2rem; margin: 5px 0; }
+    .section-heading p { color: var(--muted); }
+    .underline { height: 3px; width: 48px; background: var(--orange); margin: 10px auto; border-radius: 5px; }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .food-card { display: flex; gap: 14px; align-items: center; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 5px 18px rgba(50,30,10,.06); }
+    .food-card img { width: 42%; height: 125px; object-fit: cover; border-radius: 9px; }
+    .food-info { flex: 1; min-width: 0; }
+    .food-info h3 { font-size: 1.08rem; margin-bottom: 5px; }
+    .food-info p { font-size: .88rem; color: var(--muted); margin-bottom: 8px; }
+    .food-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+    .price { color: #b91c1c; font-weight: bold; }
+    .small-btn { padding: 8px 11px; font-size: .78rem; border-radius: 8px; }
+    .about { display: grid; grid-template-columns: 1fr 1fr; background: white; }
+    .about img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; }
+    .about-content { padding: 42px clamp(24px, 5vw, 65px); align-self: center; }
+    .about-content h2 { font-size: 2.1rem; margin: 7px 0 12px; }
+    .about-content p { color: var(--muted); }
+    .features { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 24px; font-weight: bold; font-size: .88rem; }
+    .features span::before { content: '✓'; color: var(--orange); margin-right: 7px; font-weight: 900; }
+    .contact { padding: 36px 0; text-align: center; background: #fff0df; }
+    .contact h2 { font-size: 2rem; margin-bottom: 8px; }
+    .contact p { color: var(--muted); margin-bottom: 16px; }
+    footer { background: #17130f; color: #eee; padding: 28px 0 16px; }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px; }
+    footer h3 { margin-bottom: 10px; font-size: 1.1rem; }
+    footer p, footer a { color: #c9c4bd; font-size: .9rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .copyright { border-top: 1px solid #3b342d; text-align: center; margin-top: 22px; padding-top: 14px; color: #aaa; font-size: .82rem; }
+    #notice { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #211b16; color: white; padding: 12px 18px; border-radius: 10px; box-shadow: 0 5px 20px #0003; display: none; z-index: 20; }
+    @media (max-width: 850px) {
+      .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .food-card { align-items: flex-start; flex-direction: column; }
+      .food-card img { width: 100%; height: 150px; }
+      .food-bottom { width: 100%; }
+      .about { grid-template-columns: 1fr; }
+      .about img { max-height: 300px; }
+    }
+    @media (max-width: 600px) {
+      .navbar { flex-direction: column; padding: 14px 0; gap: 12px; }
+      .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+      .nav-links a { font-size: .85rem; }
+      .nav-links .btn { padding: 9px 13px; }
+      .hero { min-height: 390px; background-position: 62% center; }
+      .hero-content { padding: 42px 0; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .food-card { flex-direction: row; align-items: center; }
+      .food-card img { width: 38%; height: 120px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .section-heading h2 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container navbar">
+      <a class="logo" href="#home">🍴 Tasty<span>Bite</span><small>RESTAURANT</small></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#contact">Contact</a>
+        <a class="btn" href="#contact">Reserve Table</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Good food • Good mood</div>
+          <h1>Delicious Food<br><span>For Every Mood</span></h1>
+          <p>Fresh ingredients, delightful flavors and a memorable dining experience made just for you.</p>
+          <a class="btn" href="#menu">Explore Menu →</a>
+          <a class="btn btn-outline" href="#contact">Book a Table</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">— Our Menu</div>
+          <h2>Popular Dishes</h2>
+          <div class="underline"></div>
+          <p>A wide range of delicious dishes to satisfy your cravings.</p>
+        </div>
+        <div class="menu-grid">
+          <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=500&q=80" alt="Freshly baked pizza">
+            <div class="food-info"><h3>Margherita Pizza</h3><p>Tomatoes, mozzarella and basil.</p><div class="food-bottom"><span class="price">₹249</span><button class="btn small-btn" onclick="addToCart('Margherita Pizza',249)">Add to Cart</button></div></div>
+          </article>
+          <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" alt="Classic burger">
+            <div class="food-info"><h3>Classic Burger</h3><p>Juicy patty, lettuce and cheese.</p><div class="food-bottom"><span class="price">₹199</span><button class="btn small-btn" onclick="addToCart('Classic Burger',199)">Add to Cart</button></div></div>
+          </article>
+          <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=500&q=80" alt="Chicken biryani">
+            <div class="food-info"><h3>Chicken Biryani</h3><p>Aromatic, flavorful Hyderabadi biryani.</p><div class="food-bottom"><span class="price">₹299</span><button class="btn small-btn" onclick="addToCart('Chicken Biryani',299)">Add to Cart</button></div></div>
+          </article>
+          <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=500&q=80" alt="Creamy pasta">
+            <div class="food-info"><h3>Pasta Alfredo</h3><p>Creamy white sauce pasta with herbs.</p><div class="food-bottom"><span class="price">₹229</span><button class="btn small-btn" onclick="addToCart('Pasta Alfredo',229)">Add to Cart</button></div></div>
+          </article>
+          <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=500&q=80" alt="Vegetable noodles">
+            <div class="food-info"><h3>Veg Noodles</h3><p>Stir-fried noodles with fresh vegetables.</p><div class="food-bottom"><span class="price">₹179</span><button class="btn small-btn" onclick="addToCart('Veg Noodles',179)">Add to Cart</button></div></div>
+          </article>
+          <article class="food-card">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=80" alt="Ice cream dessert">
+            <div class="food-info"><h3>Ice Cream</h3><p>Cool, creamy and delicious dessert.</p><div class="food-bottom"><span class="price">₹99</span><button class="btn small-btn" onclick="addToCart('Ice Cream',99)">Add to Cart</button></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85" alt="Warm and welcoming restaurant interior">
+      <div class="about-content">
+        <div class="eyebrow">— About Us</div>
+        <h2>Our Story</h2>
+        <p>At TastyBite, we believe good food brings people together. Our chefs prepare every dish with fresh ingredients, care and a passion for great flavor. Come in and make yourself at home.</p>
+        <div class="features"><span>Fresh Ingredients</span><span>Expert Chefs</span><span>Cozy Ambience</span></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2>Let's Make Your Day Delicious!</h2>
+        <p>Visit us or contact us to reserve your table.</p>
+        <a class="btn" href="mailto:hello@tastybite.example">Contact Us</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div><a class="logo" href="#home">🍴 Tasty<span>Bite</span><small>RESTAURANT</small></a><p style="margin-top:12px">Good food, great moments.</p></div>
+        <div><h3>Quick Links</h3><div class="footer-links"><a href="#home">Home</a><a href="#menu">Menu</a><a href="#about">About</a><a href="#contact">Contact</a></div></div>
+        <div><h3>Contact Us</h3><p>☎ +91 98765 43210</p><p>✉ hello@tastybite.example</p><p>📍 Vijayawada, India</p></div>
+      </div>
+      <div class="copyright">© 2026 TastyBite Restaurant. All rights reserved.</div>
+    </div>
+  </footer>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <script>
+    let cart = [];
+    function addToCart(name, price) {
+      cart.push({ name, price });
+      const total = cart.reduce((sum, item) => sum + item.price, 0);
+      const notice = document.getElementById('notice');
+      notice.textContent = name + ' added! Items: ' + cart.length + ' | Total: ₹' + total;
+      notice.style.display = 'block';
+      clearTimeout(window.noticeTimer);
+      window.noticeTimer = setTimeout(() => notice.style.display = 'none', 2600);
+    }
+  </script>
+</body>
+</html>
